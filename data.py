@@ -1,9 +1,7 @@
 import csv
 import glob
 import pandas as pd
-from mammal import *
-from reptile import *
-from poultry import *
+import os, sys
     
 def writeDict(data,filename) :
     data_str = ""
@@ -13,22 +11,27 @@ def writeDict(data,filename) :
     with open(filename+'.txt', 'w', encoding="UTF-8") as dt:
         dt.write(data_str)
 
+
+def big_class() :
+    return "KEY"
+
+
 def animal_question(animalType,data,data_food) :
     with open(animalType+'.csv', 'w', newline='',encoding="UTF-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["Class", "Question", "Answer"])
+        writer.writerow(["Animal", "Question", "Answer"])
         for name in data :
-            writer.writerow(["Animal", f"{name}", f"ที่นี่มี{name}ค่ะ"])
-            writer.writerow(["Animal", f"มี{name}ไหม", f"ที่นี่มี{name}ค่ะ"])
-            writer.writerow(["Animal", f"มี{name}ไหมอ่ะ", f"ที่นี่มี{name}ค่ะ"])
-            writer.writerow(["Animal", f"มี{name}ไหมหรือเปล่า", f"ที่นี่มี{name}ค่ะ"])
-            writer.writerow(["Animal", f"มี{name}ป้ะ", f"ที่นี่มี{name}ค่ะ"])
+            writer.writerow([animalType, f"{name}", f"ที่นี่มี{name}ค่ะ"])
+            writer.writerow([animalType, f"มี{name}ไหม", f"ที่นี่มี{name}ค่ะ"])
+            writer.writerow([animalType, f"มี{name}ไหมอ่ะ", f"ที่นี่มี{name}ค่ะ"])
+            writer.writerow([animalType, f"มี{name}ไหมหรือเปล่า", f"ที่นี่มี{name}ค่ะ"])
+            writer.writerow([animalType, f"มี{name}ป้ะ", f"ที่นี่มี{name}ค่ะ"])
             
-            writer.writerow(["Animal", f"{name}กินอะไร", f"{data_food[name]}"])
-            writer.writerow(["Animal", f"{name}กินไรอ่ะ", f"{data_food[name]}"])
-            writer.writerow(["Animal", f"{name}กินราย", f"{data_food[name]}"])
-            writer.writerow(["Animal", f"{name}กินไอไหร", f"{data_food[name]}"])
-            writer.writerow(["Animal", f"{name}กินไร", f"{data_food[name]}"])
+            writer.writerow([animalType, f"{name}กินอะไร", f"{data_food[name]}"])
+            writer.writerow([animalType, f"{name}กินไรอ่ะ", f"{data_food[name]}"])
+            writer.writerow([animalType, f"{name}กินราย", f"{data_food[name]}"])
+            writer.writerow([animalType, f"{name}กินไอไหร", f"{data_food[name]}"])
+            writer.writerow([animalType, f"{name}กินไร", f"{data_food[name]}"])
 
 
 def schedule_question(scheduleType,data) :
@@ -82,6 +85,20 @@ def merge(output_filename="merged_data.csv"):
     all_data = pd.concat(dfs, ignore_index=True)
     all_data.to_csv(output_filename, index=False, encoding="UTF-8")
 
+def clear() :
+    all_csv = glob.glob('*.csv')
+    all_txt = glob.glob('*.txt')
+    for data in all_csv :
+        os.remove(data)
+
+    for data in all_txt :
+        os.remove(data)
+
+def openfile() :
+    readme = os.open("README.txt", os.O_RDWR|os.O_CREAT)  
+    os.close(readme)
+
+clear()
 
 # animal_question("reptile",reptile,reptile_food)
 # animal_question("mammal",mammal,mammal_food)
