@@ -18,6 +18,8 @@ day = ["วันจันทร์","จันทร์","จัน",
        "วันอาทิตย์","อาทิตย์"
        ]
 
-schedule_question("day",day)
+ans = ["ที่นี่เปิดทุกวัน จันทร์-อาทิตย์ เวลา 08:00-17:00 ค่ะ"]
+
+schedule_question("day",day,ans)
 
 #writeDict(day,"Schedule")

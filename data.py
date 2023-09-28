@@ -34,29 +34,29 @@ def animal_question(animalType,data,data_food) :
             writer.writerow([animalType, f"{name}กินไร", f"{data_food[name]}"])
 
 
-def schedule_question(scheduleType,data) :
+def schedule_question(scheduleType,data,ans) :
     with open(scheduleType+'.csv', 'w', newline='',encoding="UTF-8") as file:
         writer = csv.writer(file)
         writer.writerow(["Class", "Question", "Answer"])
         for time in data :
-            writer.writerow(["Schedule", f"{time}เปิดกี่โมง", f"ที่นี่เปิดทุกวันเวลา 08:00 ค่ะ"])
-            writer.writerow(["Schedule", f"{time}ปิดกี่โมง", f"ที่นี่ปิดเวลา 17:00 ค่ะ"])
-        writer.writerow(["Schedule", f"เปิดกี่โมง", f"ที่นี่เปิดทุกวัน 08:00 ค่ะ"])
-        writer.writerow(["Schedule", f"ปิดกี่โมง", f"ที่นี่ปิดเวลา 17:00 ค่ะ"])
-        writer.writerow(["Schedule", f"เปิดปิดกี่โมง", f"ที่นี่เปิดเวลา 08:00-17:00 ค่ะ"])
-        writer.writerow(["Schedule", f"เปิด-ปิดกี่โมง", f"ที่นี่เปิดเวลา 08:00-17:00 ค่ะ"])
+            writer.writerow(["Schedule", f"{time}เปิดกี่โมง", f"{ans[0]}"])
+            writer.writerow(["Schedule", f"{time}ปิดกี่โมง", f"{ans[0]}"])
+        writer.writerow(["Schedule", f"เปิดกี่โมง", f"{ans[0]}"])
+        writer.writerow(["Schedule", f"ปิดกี่โมง", f"{ans[0]}"])
+        writer.writerow(["Schedule", f"เปิดปิดกี่โมง", f"{ans[0]}"])
+        writer.writerow(["Schedule", f"เปิด-ปิดกี่โมง", f"{ans[0]}"])
 
 
-def price_question(priceType,data,data_price,price) :
+def price_question(priceType,data,price) :
     with open(priceType+'.csv', 'w', newline='',encoding="UTF-8") as file:
         writer = csv.writer(file)
         writer.writerow(["Class", "Question", "Answer"])
         for age in data :
-            writer.writerow(["Price", f"บัตร{age}", f"{data_price[age]}ค่ะ"])
-            writer.writerow(["Price", f"{age}กี่บาท", f"{data_price[age]}ค่ะ"])
-            writer.writerow(["Price", f"ราคาเข้า{age}", f"{data_price[age]}ค่ะ"])
-            writer.writerow(["Price", f"บัตร{age}เท่าไร", f"{data_price[age]}ค่ะ"])
-            writer.writerow(["Price", f"ค่าเข้า{age}เท่าไร", f"{data_price[age]}ค่ะ"])
+            writer.writerow(["Price", f"บัตร{age}", f"{price}ค่ะ"])
+            writer.writerow(["Price", f"{age}กี่บาท", f"{price}ค่ะ"])
+            writer.writerow(["Price", f"ราคาเข้า{age}", f"{price}ค่ะ"])
+            writer.writerow(["Price", f"บัตร{age}เท่าไร", f"{price}ค่ะ"])
+            writer.writerow(["Price", f"ค่าเข้า{age}เท่าไร", f"{price}ค่ะ"])
         writer.writerow(["Price", f"ค่าเข้า", f"{price}"])
         writer.writerow(["Price", f"ค่าเข้ากี่บาท", f"{price}"])
         writer.writerow(["Price", f"ราคาบัตร", f"{price}"])
@@ -64,14 +64,19 @@ def price_question(priceType,data,data_price,price) :
         writer.writerow(["Price", f"บัตรเข้าสวนสัตว์กี่บาท", f"{price}"])
         writer.writerow(["Price", f"ราคาเข้า", f"{price}"])
         writer.writerow(["Price", f"บัตรเข้าราคา", f"{price}"])
+        writer.writerow(["Price", f"เท่าไร", f"{price}"])
 
 
-def activities_question(priceType,data,data_activities) :
-    with open(priceType+'.csv', 'w', newline='',encoding="UTF-8") as file:
+def activities_question(activitiesType,data,data_activities) :
+    with open(activitiesType+'.csv', 'w', newline='',encoding="UTF-8") as file:
         writer = csv.writer(file)
         writer.writerow(["Class", "Question", "Answer"])
         for activities in data :
-            writer.writerow(["Activities", f"", f""])
+            writer.writerow(["Activities", f"{activities}", f"{data_activities}"])
+            writer.writerow(["Activities", f"มี{activities}อะไรบ้าง", f"{data_activities}"])
+        writer.writerow(["Activities", f"รอบการแสดง", f"{data_activities}"])
+        writer.writerow(["Activities", f"ขอดูรอบการแสดงหน่อย", f"{data_activities}"])
+            
 
 def merge(output_filename="merged_data.csv"):
     csv_files = glob.glob('*.csv')
@@ -98,7 +103,7 @@ def openfile() :
     readme = os.open("README.txt", os.O_RDWR|os.O_CREAT)  
     os.close(readme)
 
-clear()
+# clear()
 
 # animal_question("reptile",reptile,reptile_food)
 # animal_question("mammal",mammal,mammal_food)
